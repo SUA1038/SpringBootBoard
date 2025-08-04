@@ -31,16 +31,27 @@ repositories {
 
 dependencies {
     /* 메이븐 리포지토리에서 코드를 가져와 코끼리를 누르면 가져온다. */
+    // 스프링 시큐리티 추가 : 로그인 처리용 p678 https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    implementation("org.springframework.boot:spring-boot-starter-security:3.4.7")
+
+    // 스프링 시큐리티6+타입리프 https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity6
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
+
+    // 카카오 로그인 oauth2 추가
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-client
+    implementation 'org.springframework.security:spring-security-oauth2-client:6.3.1'
 
 
-    implementation 'org.springframework.boot:spring-boot-starter-validation' /* 등록처리와 화면 개발 */
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' /* 프론트 관련 */
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0' /* 프론트 레이아웃 관련*/
+    // https://mvnrepository.com/artifact/net.coobird/thumbnailator
+    implementation("net.coobird:thumbnailator:0.4.16")                      /* 파일 섬네일 처리용 p603 */
 
     implementation 'org.springframework.boot:spring-boot-starter-web'       /* string-web */
     compileOnly 'org.projectlombok:lombok'                                  /* 롬북 */
-    annotationProcessor 'org.projectlombok:lombok'                          /* 롬북 */
+    annotationProcessor 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2'/* 롬북 */
     testCompileOnly 'org.projectlombok:lombok'                              /* 롬북 */
     testAnnotationProcessor 'org.projectlombok:lombok'                      /* 롬북 */
 
@@ -56,11 +67,16 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'  /* 데이터 베이스 관련*/
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'                      /* 마리아 db 드라이버 */
 
+    implementation 'org.springframework.boot:spring-boot-starter-validation' /* p487 추가 서버에서 검증용 */
     testImplementation 'org.springframework.boot:spring-boot-starter-test'  /* 테스트 junit 메서드 단위 테스트 */
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'            /* junit용 코드 */
 
     /* 쿼리dsl 문구 추가 p448쪽 6개행 추가 */
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
+
+    /* 파란책 133p Thymeleaf Layout Dialect 의존성 추가 */
+    // https://mvnrepository.com/artifact/nz.net.ultraq.thymeleaf/thymeleaf-layout-dialect
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
 
     annotationProcessor(
             "jakarta.persistence:jakarta.persistence-api",
@@ -91,3 +107,4 @@ sourceSets {
 */
 
 compileJava.dependsOn('clean')
+
